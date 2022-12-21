@@ -659,28 +659,7 @@ PyMODINIT_FUNC initGPIO(void)
 
     BoardHardwareInfo* retBoardInfo;
     int ret = getBoardType(&retBoardInfo);
-    if (ret >= 0) {
-      if (retBoardInfo->boardTypeId > ALLWINNER_BASE && retBoardInfo->boardTypeId <= ALLWINNER_MAX 
-                && retBoardInfo->boardTypeId != NanoPi_A64) {
-        revision = 1;
-      } else {
-         PyErr_SetString(PyExc_RuntimeError, "This NanoPi model is currently not supported. ");
-         setup_error = 1;
-         #if PY_MAJOR_VERSION > 2
-               return NULL;
-         #else
-               return;
-         #endif
-      }
-    } else {
-         PyErr_SetString(PyExc_RuntimeError, "It is not NanoPi based board. ");
-         setup_error = 1;
-         #if PY_MAJOR_VERSION > 2
-               return NULL;
-         #else
-               return;
-         #endif
-    }
+    revision = 1;
 
     int faBoardId = retBoardInfo->boardTypeId;
 
